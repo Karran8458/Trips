@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.head
+{
+    vertical-align: top;
+}
+.leftleft
+{
+display:inline-block;
+vertical-align:top;
+}
+.rightright
+{
+display:inline-block;
+vertical-align:top; 
+}
+.container 
+{
+    padding: 16px;
+}
+</style>
+</head>
+<body>
+    <div class= "container">
+        <div class = "head">
+                <div class = "leftleft">
+                        {% for one_freak in all_freaks %}
+                            <h1>Welcome {{one_freak.first_name}}! Let's edit your trip! </h1>
+                        {% endfor %}
+                </div>
+                <div class = "rightright">
+                    <form action="/logout" method="POST">
+                        <input type="submit" value="Logout">
+                    </form>
+                </div>
+        </div>
+        {% for one_freak in all_freaks %}
+        <form action="/jobs/{{one_freak.id}}/editjob" method="POST">
+            <p>Destination:<input type="text" placeholder="Enter destination" name="destination"></p>
+            <p>Start Date:<input type="date" placeholder="Enter start" name="start"></p>
+            <p>End Date:<input type="date" placeholder="Enter end" name="end"></p>
+            <p>Plan:<input type="text" placeholder="Enter plan" name="plan"></p>
+            <input type="submit" value="update">
+        </form>
+        {% endfor %}
+        <form action="/jobs" method="POST">
+            <input type="submit" value="Cancel">
+        </form>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <ul class=flashes>
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+              </ul>
+            {% endif %}
+        {% endwith %}
+</div>
+</body>
+</html>
