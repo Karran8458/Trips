@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.head
+{
+    vertical-align: top;
+}
+.leftleft
+{
+display:inline-block;
+vertical-align:top;
+}
+.rightright
+{
+display:inline-block;
+vertical-align:top; 
+}
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+}
+</style>
+</head>
+<body>
+<div class = "container">
+  <div class = "head">
+      <div class = "leftleft">
+          {% for one_friend in all_friends %}
+          <h1>Hello {{one_friend.first_name}}! Let's create a trip! </h1>
+          {% endfor %}
+      </div>
+      <div class = "rightright">
+          <form action="/logout" method="POST">
+              <input type="submit" value="Logout">
+          </form>
+      </div>
+  </div>
+  <form action="/new" style="border:1px solid #ccc" method="POST">
+    <h1>Add Job</h1>
+    <hr>
+
+    <label for="destination"><b>Destination:</b></label>
+    <input type="text" placeholder="Enter destination" name="destination" required>
+    <p></p>
+    <label for="start"><b>Start Date</b></label>
+    <input type="date" placeholder="Enter start" name="start" required>
+    <p></p>
+    <label for="end"><b>End Date</b></label>
+    <input type="date" placeholder="Enter end" name="end" required>
+    <p></p>
+    <label for="plan"><b>Plan</b></label>
+    <input type="text" placeholder="Enter plan" name="plan" required>
+    <p></p>
+    <div class="clearfix">
+      <button type="submit" class="signupbtn">Add</button>
+    </div>
+  </form>
+  <form action="/jobs" style="border:1px solid #ccc" method="POST">
+    <button type="submit" class="signupbtn">Cancel</button>
+  </form>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class=flashes>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+</div>
+</body>
+</html>
