@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+.container {
+  padding: 16px;
+  vertical-align: top;
+}
+
+p {
+  display: inline-block;
+  padding: 5px;
+}
+
+table {
+  border-color:black;
+  height: 5px;
+}
+tr {
+  background-color:rgb(209, 209, 209);
+}
+td {
+  width: 200px;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: rgb(243, 188, 8);
+  color: white;
+}
+
+button:hover {
+  opacity:1;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.left
+{
+display:inline-block;
+vertical-align:top;
+}
+.right
+{
+display:inline-block;
+vertical-align:top;
+border-color:black;
+}
+.head
+{
+    vertical-align: top;
+}
+.leftleft
+{
+display:inline-block;
+vertical-align:top;
+}
+.rightright
+{
+display:inline-block;
+vertical-align:top; 
+}
+
+</style>
+</head>
+<body>
+    <div class = "container">
+        <div class = "head">
+            <div class = "leftleft">
+                {% for one_result in all_results %}
+                  <h1>Hello {{one_result.first_name}}! </h1>
+                {% endfor %}
+            </div>
+            <div class = "rightright">
+                    <form action="/logout" method="POST">
+                        <input type="submit" value="Logout">
+                    </form>
+            </div>
+            <div class = "rightright">
+              <form action="/jobs/new" method="POST">
+                <input type="submit" value="Create a new trip">
+              </form>
+            </div>
+        </div>
+        <div class = "right">
+            <h1>Your trips:</h1>
+            <table>
+                <tr>
+                    <td>Destination</td>
+                    <td>Start Date</td>
+                    <td>End Date</td>
+                    <td>Plan</td>
+                    <td>Actions</td>
+                </tr>
+                {% for one_user in all_users %}
+              <tr>
+                <td><a href = "/jobs/{{one_user.id}}">{{one_user["destination"]}}</a></td>
+                <td>{{one_user["start_date"]}}</td>
+                <td>{{one_user["end_date"]}}</td>
+                <td>{{one_user["plan"]}}</td>
+                <td><form action="/jobs/{{one_user.id}}/destroy" method="POST">
+
+                  <input type="submit" placeholder = "Enter id" name="ide" value = "Remove" required>
+
+                </form></td>
+                <td><form action="/jobs/{{one_user.id}}/edit" style="border:1px solid #ccc">
+              
+                  <input type="submit" placeholder = "Enter id" name="ide" value = "Edit" required>
+              
+                </form></td>
+              </tr>
+              {% endfor %}
+            </table>
+              <!----{% for one_user in all_users %}
+                <p>ID: {{one_user["id"]}}</p>
+                <p>Title:{{one_user["title"]}}</p>
+                <p>Description:{{one_user["description"]}}</p>
+                <p>Address:{{one_user["address"]}}</p>
+                <form action="/jobs/{{one_user.id}}/edit" style="border:1px solid #ccc" method="POST">
+              
+                  <input type="submit" placeholder = "Enter id" name="ide" value = "Edit" required>
+              
+                </form>
+                <form action="/jobs/{{one_user.id}}" style="border:1px solid #ccc" method="POST">
+                
+                  <input type="submit" placeholder = "Enter id" name="ide" value = "View" required>
+              
+                </form>
+                <form action="/jobs/{{one_user.id}}/destroy" method="POST">
+
+                  <input type="submit" placeholder = "Enter id" name="ide" value = "Remove" required>
+
+                </form>
+              {% endfor %}-->
+              <h1>Other users' jobs:</h1>
+              <table>
+                <tr>
+                  <td>Destination</td>
+                  <td>Start Date</td>
+                  <td>End Date</td>
+                  <td>Plan</td>
+                  <td>Actions</td>
+                </tr>
+                {% for one_me in all_me %}
+              <tr>
+                <td><a href = "/jobs/{{one_me.id}}">{{one_me["destination"]}}</a></td>
+                <td>{{one_me["start_date"]}}</td>
+                <td>{{one_me["end_date"]}}</td>
+                <td>{{one_me["plan"]}}</td>
+              </tr>
+              {% endfor %}
+            </table>
+
+        </div>
+            
+    </div>
+</body>
+</html>
