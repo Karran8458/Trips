@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+.container {
+  padding: 16px;
+}
+
+</style>
+</head>
+<body>
+    <div class = "container">
+            <h1>Login Successful!</h1>
+            <h3>You are logged in:</h3>
+                {% for one_result in all_result %}
+                    <p>User: {{ one_result.first_name }}</p>
+                {% endfor %}
+            <form action="/jobs" method="POST">
+                <input type="submit" value="Dashboard">
+            </form>
+            <form action="/logout" method="POST">
+                <input type="submit" value="Home">
+            </form>
+    </div>
+</body>
+</html>
