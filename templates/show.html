@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+.container {
+  padding: 16px;
+}
+
+</style>
+</head>
+<body>
+    <div class = "container">
+            <h1>New User Added!</h1>
+            <h3>New User Info:</h3>
+                <p>First name: {{ fname_on_template }}</p>
+                <p>Last name: {{ lname_on_template }}</p>
+                <p>Email: {{ email_on_template }}</p>
+            <form action="/home" method="POST">
+                <input type="submit" value="Home">
+            </form>
+    </div>
+</body>
+</html>
